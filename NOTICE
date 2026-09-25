@@ -1,0 +1,17 @@
+research-figure-skill
+Copyright 2026 YuanyuanMa03, for original modifications in this project.
+
+Based on scipilot-figure-skill by Haojae:
+https://github.com/Haojae/scipilot-figure-skill
+Source revision: 43098ddb9e6a6d142218540c114f9ed38922fc42
+Copyright (c) 2026 Haojae.
+
+The upstream source was distributed under the MIT License. Its copyright and
+permission notice are preserved verbatim in LICENSE-UPSTREAM-MIT. Those MIT
+terms continue to apply to the upstream material included here. Original
+modifications made for research-figure-skill are offered under the Apache
+License, Version 2.0, in LICENSE. This does not relicense Haojae's original
+material or remove the conditions of its MIT License.
+
+Changes include a redesigned Skill entrypoint, role-aware data profiling,
+study-design diagnostics, revised figure guidance, and related documentation.
