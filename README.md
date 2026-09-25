@@ -7,6 +7,12 @@
 
 > 本项目基于 [Haojae/scipilot-figure-skill](https://github.com/Haojae/scipilot-figure-skill) 的 `43098dd` 版本开发。仓库独立创建，不隶属于 SciPilot Skills 家族。来源与许可见[来源说明](NOTICE)。
 
+## 安装
+
+把下面这段话发给正在使用的 Agent，让它自行选择适合当前软件的安装方式：
+
+> 请将 https://github.com/YuanyuanMa03/research-figure-skill 中的 `research-figure-skill` 安装到你当前使用的软件的用户级 Skills 中。优先使用软件自带的插件或 Skill 安装命令；如果没有，使用 `npx skills add YuanyuanMa03/research-figure-skill --skill research-figure-skill -g` 并选择当前 Agent。安装后确认能读取 `SKILL.md`，告诉我安装位置和结果。
+
 ## 能做什么
 
 - **先判断，再作图**：根据图要回答的问题、变量角色与数据分布推荐图型。
@@ -17,7 +23,7 @@
 
 这些是作图线索。Skill 不会仅凭列名判定实验设计，也不会自动生成显著性结论。图中的误差、`n`、聚合和统计标注需有明确来源。
 
-## 导入 Codex 与 Claude Code
+## 手动导入
 
 仓库根目录同时提供 Codex 与 Claude Code 的插件清单，两个平台读取同一份 [Skill](skills/research-figure-skill/SKILL.md)。在终端运行：
 
@@ -29,6 +35,9 @@ codex plugin add research-figure-skill@research-figure-tools
 # Claude Code
 claude plugin marketplace add YuanyuanMa03/research-figure-skill
 claude plugin install research-figure-skill@research-figure-tools
+
+# 其他支持 Agent Skills 的软件（安装时选择当前 Agent）
+npx skills add YuanyuanMa03/research-figure-skill --skill research-figure-skill -g
 ```
 
 导入会安装 Skill 指令和脚本，不会自动安装 Python 库。首次运行脚本前，如当前 Python 环境缺少依赖，可克隆仓库并执行 `python3 -m pip install -r requirements.txt`；SciencePlots、pypdf、kaleido 和 PyMuPDF 是可选增强。Claude Code 也可用 `claude --plugin-dir /path/to/research-figure-skill` 临时加载本地目录。
