@@ -9,9 +9,18 @@
 
 ## 安装
 
-把下面这段话发给正在使用的 Agent，让它自行选择适合当前软件的安装方式：
+复制下面的 Prompt，直接粘贴给正在使用的 Agent：
 
-> 请将 https://github.com/YuanyuanMa03/research-figure-skill 中的 `research-figure-skill` 安装到你当前使用的软件的用户级 Skills 中。优先使用软件自带的插件或 Skill 安装命令；如果没有，使用 `npx skills add YuanyuanMa03/research-figure-skill --skill research-figure-skill -g` 并选择当前 Agent。安装后确认能读取 `SKILL.md`，告诉我安装位置和结果。
+```text
+请直接帮我安装 research-figure-skill：https://github.com/YuanyuanMa03/research-figure-skill
+
+请识别你当前运行的软件，选择对应命令并安装到用户级目录：
+- Codex：依次运行 codex plugin marketplace add YuanyuanMa03/research-figure-skill --ref main 和 codex plugin add research-figure-skill@research-figure-tools。
+- Claude Code：依次运行 claude plugin marketplace add YuanyuanMa03/research-figure-skill 和 claude plugin install research-figure-skill@research-figure-tools。
+- 其他支持 Agent Skills 的软件：运行 npx skills add YuanyuanMa03/research-figure-skill --skill research-figure-skill -g，并选择当前 Agent。
+
+安装后确认 research-figure-skill 的 SKILL.md 可以读取，告诉我安装位置和结果。请执行安装，不要只给我安装步骤。
+```
 
 ## 能做什么
 
