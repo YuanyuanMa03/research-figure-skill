@@ -1,0 +1,11 @@
+{
+  "name": "research-figure-skill",
+  "version": "0.1.0",
+  "description": "Plan, draw, and review scientific data figures across disciplines.",
+  "author": {
+    "name": "YuanyuanMa03",
+    "url": "https://github.com/YuanyuanMa03"
+  },
+  "homepage": "https://github.com/YuanyuanMa03/research-figure-skill",
+  "license": "Apache-2.0 AND MIT"
+}

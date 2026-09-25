@@ -23,8 +23,10 @@ Rows are observations, not necessarily independent samples. Never infer the anal
 
 Run `scripts/profile_data.py` for tabular data. Supply roles when known:
 
+Resolve bundled script and reference paths relative to this `SKILL.md`, not the user's working directory. Pass the absolute script path to Python while keeping the user's data path intact. Python dependencies are listed in the plugin root's `requirements.txt`; check availability before running a script and report a missing dependency clearly.
+
 ```bash
-python scripts/profile_data.py data.csv --group treatment --unit subject_id --time visit --value response
+python3 <skill-directory>/scripts/profile_data.py data.csv --group treatment --unit subject_id --time visit --value response
 ```
 
 `--group` and `--value` can be repeated. `--unit`, `--time`, and `--value` are optional. Use `--value` when an integer-coded measurement is guessed to be categorical. The report distinguishes row counts from distinct unit counts, notes repeated unit observations and duplicate unit-time records within supplied groups, and flags zero/negative values that rule out an ordinary log axis. These are clues for the researcher to interpret, not automatic classifications of a study design. Inspect column type guesses before using them: numeric IDs, encoded categories, and dates are easy to misclassify. See [data profiling](references/data_profiling.md) when interpreting the report.

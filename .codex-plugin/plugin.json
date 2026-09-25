@@ -1,0 +1,24 @@
+{
+  "name": "research-figure-skill",
+  "version": "0.1.0",
+  "description": "Plan, draw, and review scientific data figures across disciplines.",
+  "author": {
+    "name": "YuanyuanMa03",
+    "url": "https://github.com/YuanyuanMa03"
+  },
+  "repository": "https://github.com/YuanyuanMa03/research-figure-skill",
+  "license": "Apache-2.0 AND MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Research Figure Skill",
+    "shortDescription": "Choose, draw, and review scientific data figures.",
+    "longDescription": "Use study-design clues and visual checks to create clear scientific data figures across disciplines.",
+    "developerName": "YuanyuanMa03",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://github.com/YuanyuanMa03/research-figure-skill",
+    "defaultPrompt": [
+      "Help me choose and create a figure for my research data."
+    ]
+  }
+}

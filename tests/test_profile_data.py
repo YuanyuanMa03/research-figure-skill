@@ -6,7 +6,8 @@ from pathlib import Path
 
 import pandas as pd
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "skills" /
+                       "research-figure-skill" / "scripts"))
 from profile_data import profile_data, render_report  # noqa: E402
 
 

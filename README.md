@@ -17,18 +17,21 @@
 
 这些是作图线索。Skill 不会仅凭列名判定实验设计，也不会自动生成显著性结论。图中的误差、`n`、聚合和统计标注需有明确来源。
 
-## 快速开始
+## 导入 Codex 与 Claude Code
 
-将仓库放入代理的 Skills 目录并安装 Python 依赖：
+仓库根目录同时提供 Codex 与 Claude Code 的插件清单，两个平台读取同一份 [Skill](skills/research-figure-skill/SKILL.md)。在终端运行：
 
 ```bash
 # Codex
-git clone https://github.com/YuanyuanMa03/research-figure-skill.git \
-  ~/.codex/skills/research-figure-skill
-python3 -m pip install -r ~/.codex/skills/research-figure-skill/requirements.txt
+codex plugin marketplace add YuanyuanMa03/research-figure-skill --ref main
+codex plugin add research-figure-skill@research-figure-tools
+
+# Claude Code
+claude plugin marketplace add YuanyuanMa03/research-figure-skill
+claude plugin install research-figure-skill@research-figure-tools
 ```
 
-Claude Code 可将同一仓库克隆到 `~/.claude/skills/research-figure-skill`。按实际使用的 Python 环境安装依赖；SciencePlots、pypdf、kaleido 和 PyMuPDF 是可选增强。
+导入会安装 Skill 指令和脚本，不会自动安装 Python 库。首次运行脚本前，如当前 Python 环境缺少依赖，可克隆仓库并执行 `python3 -m pip install -r requirements.txt`；SciencePlots、pypdf、kaleido 和 PyMuPDF 是可选增强。Claude Code 也可用 `claude --plugin-dir /path/to/research-figure-skill` 临时加载本地目录。
 
 给代理的请求示例：
 
@@ -37,7 +40,7 @@ Claude Code 可将同一仓库克隆到 `~/.claude/skills/research-figure-skill`
 也可以直接运行数据剖析脚本：
 
 ```bash
-python3 scripts/profile_data.py data.csv \
+python3 skills/research-figure-skill/scripts/profile_data.py data.csv \
   --group treatment --unit subject_id --time visit --value response
 ```
 
@@ -46,19 +49,21 @@ python3 scripts/profile_data.py data.csv \
 ## 工作方式
 
 1. 确认图要回答的问题、响应变量、分组、独立分析单位和展示场景。
-2. 用 [profile_data.py](scripts/profile_data.py) 检查列、缺失、分组、重复记录与分布。
-3. 参考[图型选择](references/chart_selection.md)提出建议；小样本优先考虑显示原始点，重复观测考虑配对点或个体轨迹。
-4. 用[绘图配方](references/plot_recipes.md)绘制，并记录聚合、变换、排除和误差定义。
-5. 渲染预览，按[视觉自检](references/visual_review.md)检查，使用 [export_figure.py](scripts/export_figure.py) 导出。
-6. 用 [check_figure.py](scripts/check_figure.py) 核对文件格式、DPI 与 PDF 字体；期刊要求以目标期刊的最新作者指南为准。
+2. 用 [profile_data.py](skills/research-figure-skill/scripts/profile_data.py) 检查列、缺失、分组、重复记录与分布。
+3. 参考[图型选择](skills/research-figure-skill/references/chart_selection.md)提出建议；小样本优先考虑显示原始点，重复观测考虑配对点或个体轨迹。
+4. 用[绘图配方](skills/research-figure-skill/references/plot_recipes.md)绘制，并记录聚合、变换、排除和误差定义。
+5. 渲染预览，按[视觉自检](skills/research-figure-skill/references/visual_review.md)检查，使用 [export_figure.py](skills/research-figure-skill/scripts/export_figure.py) 导出。
+6. 用 [check_figure.py](skills/research-figure-skill/scripts/check_figure.py) 核对文件格式、DPI 与 PDF 字体；期刊要求以目标期刊的最新作者指南为准。
 
-`SKILL.md` 是代理入口；`references/` 提供按需阅读的决策和版面资料。此 Skill 专注数据图，不覆盖流程图、概念示意图和图像合成。
+插件清单位于 [plugin.json](plugin.json)、[Codex 清单](.codex-plugin/plugin.json)、[Claude Code 清单](.claude-plugin/plugin.json)；[Skill 目录](skills/research-figure-skill/)保留脚本与按需阅读的参考资料。此 Skill 专注数据图，不覆盖流程图、概念示意图和图像合成。
 
 ## 验证
 
 ```bash
 python3 -m unittest discover -s tests -v
-python3 scripts/profile_data.py --help
+python3 skills/research-figure-skill/scripts/profile_data.py --help
+claude plugin validate .claude-plugin/plugin.json --strict
+claude plugin validate .claude-plugin/marketplace.json --strict
 ```
 
 ## 许可与来源
@@ -71,6 +76,6 @@ python3 scripts/profile_data.py --help
 
 `research-figure-skill` helps agents plan, draw, and review scientific data figures across disciplines. It separates observation rows from independent units, flags repeated measurements and duplicate unit-time records, supports explicit measurement roles, and checks rendered figures. Study-design and chart suggestions are clues for review, not automatic statistical conclusions.
 
-Install it as a Skill, then run `python3 scripts/profile_data.py data.csv --group treatment --unit subject_id --time visit --value response` to inspect a table. See [SKILL.md](SKILL.md) for the agent workflow and [the references](references/) for chart selection, plotting, and review.
+Import it through a plugin marketplace: `codex plugin marketplace add YuanyuanMa03/research-figure-skill --ref main` or `claude plugin marketplace add YuanyuanMa03/research-figure-skill`, then install `research-figure-skill@research-figure-tools` in the same client. Run `python3 skills/research-figure-skill/scripts/profile_data.py data.csv --group treatment --unit subject_id --time visit --value response` to inspect a table. See [SKILL.md](skills/research-figure-skill/SKILL.md) for the agent workflow and [the references](skills/research-figure-skill/references/) for chart selection and review.
 
 This independent project is based on [Haojae/scipilot-figure-skill](https://github.com/Haojae/scipilot-figure-skill) at commit `43098dd`. New original modifications use [Apache-2.0](LICENSE); retained upstream material remains under its [MIT license](LICENSE-UPSTREAM-MIT). See [NOTICE](NOTICE) for attribution.

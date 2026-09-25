@@ -1,0 +1,14 @@
+{
+  "name": "research-figure-tools",
+  "description": "Scientific figure skills",
+  "owner": {
+    "name": "YuanyuanMa03"
+  },
+  "plugins": [
+    {
+      "name": "research-figure-skill",
+      "source": "./",
+      "description": "Plan, draw, and review scientific data figures across disciplines."
+    }
+  ]
+}
